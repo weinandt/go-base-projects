@@ -8,3 +8,7 @@
 
 ## Generating Go Code from proto
 `protoc --go_out=. --go_opt=paths=source_relative --go-grpc_out=. --go-grpc_opt=paths=source_relative user/user.proto`
+
+## Running
+1. `go run server.go`
+2. `go run client.go`
