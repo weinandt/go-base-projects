@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/weinandt/go-base-projects/grpcBase/user;user";
+
+message UserRequest {
+    string id = 1;
+}
+
+message UserReponse {
+    string id = 1;
+    string name = 2;
+}
+
+ service UserService {
+    rpc GetUser (UserRequest) returns (UserReponse);
+ }
