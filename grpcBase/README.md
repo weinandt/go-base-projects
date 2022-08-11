@@ -12,3 +12,7 @@
 ## Running
 1. `go run server.go`
 2. `go run client.go`
+
+## To hit server with grpcurl instead of the client
+1. Install grpcurl `go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest`
+2. `grpcurl -plaintext -proto=user/user.proto -d '{"id": "MyTestID"}' localhost:50000 user.UserService/GetUser`

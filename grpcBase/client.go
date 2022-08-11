@@ -11,7 +11,7 @@ import (
 )
 
 func main() {
-	address := "localhost:5000"
+	address := "localhost:50000"
 
 	conn, err := grpc.Dial(address, grpc.WithInsecure(), grpc.WithBlock())
 	if err != nil {
@@ -24,7 +24,7 @@ func main() {
 	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
 	defer cancel()
 
-	userResponse, err := client.GetUser(ctx, &pb.UserRequest{Id: "asdf"})
+	userResponse, err := client.GetUser(ctx, &pb.UserRequest{Id: "myId"})
 	if err != nil {
 		fmt.Println(err)
 		panic("Could not get response for getUser request.")

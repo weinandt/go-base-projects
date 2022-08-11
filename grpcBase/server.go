@@ -25,7 +25,7 @@ func (u *UserServiceServer) GetUser(ctx context.Context, userRequest *pb.UserReq
 }
 
 func main() {
-	hostPort := "localhost:5000"
+	hostPort := "localhost:50000"
 	listener, err := net.Listen("tcp", hostPort)
 	if err != nil {
 		fmt.Println("Failed to set up listener.")
