@@ -15,4 +15,8 @@
 
 ## To hit server with grpcurl instead of the client
 1. Install grpcurl `go install github.com/fullstorydev/grpcurl/cmd/grpcurl@latest`
-2. `grpcurl -plaintext -proto=user/user.proto -d '{"id": "MyTestID"}' localhost:50000 user.UserService/GetUser`
+2. `grpcurl -plaintext -d '{"id": "MyTestID"}' localhost:50000 user.UserService/GetUser`
+
+## Using grpcui
+1. Install grpcui: `go install github.com/fullstorydev/grpcui/cmd/grpcui@latest`
+2. `grpcui -plaintext localhost:50000`

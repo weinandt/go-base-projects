@@ -7,6 +7,7 @@ import (
 
 	pb "github.com/weinandt/go-base-projects/grpcBase/user"
 	"google.golang.org/grpc"
+	"google.golang.org/grpc/reflection"
 )
 
 type UserServiceServer struct {
@@ -32,6 +33,9 @@ func main() {
 	}
 
 	server := grpc.NewServer()
+
+	// Allowing client to inspect the proto.
+	reflection.Register(server)
 
 	pb.RegisterUserServiceServer(server, &UserServiceServer{})
 	fmt.Println("Starting server on", hostPort)
