@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"net"
 
-	pb "github.com/weinandt/go-base-projects/grpcBase/user"
+	pb "github.com/weinandt/go-base-projects/grpc/user"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/reflection"
 )

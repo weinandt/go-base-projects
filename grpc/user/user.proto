@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user;
 
-option go_package = "github.com/weinandt/go-base-projects/grpcBase/user;user";
+option go_package = "github.com/weinandt/go-base-projects/grpc/user;user";
 
 message UserRequest {
     string id = 1;

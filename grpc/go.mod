@@ -1,4 +1,4 @@
-module github.com/weinandt/go-base-projects/grpcBase
+module github.com/weinandt/go-base-projects/grpc
 
 go 1.18
 
