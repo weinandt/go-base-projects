@@ -9,3 +9,9 @@
 2. In another terminal: `psql -U postgres -h localhost -f dbScripts/dbInitialization.sql`
     - Use `postgres` as a password.
 
+## To Create a User and hit a the database
+1. `docker-compose up`
+1. `go run .`
+
+## To Run Test
+1. `go test ./...`
