@@ -30,6 +30,6 @@ func main() {
 	if err != nil {
 		fmt.Println("failed to create user")
 	} else {
-		fmt.Println(newUser)
+		fmt.Printf("User Created: %+v\n", *newUser)
 	}
 }
