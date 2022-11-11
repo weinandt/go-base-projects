@@ -5,6 +5,7 @@ import (
 	"io"
 	"log"
 	"net/http"
+	"time"
 )
 
 func makeRequest() (string, error) {
@@ -27,8 +28,25 @@ func makeRequest() (string, error) {
 	return bodyString, nil
 }
 
+func makeCallOrTimeOutUsingTimePackage(timeToWaitInMs uint) (string, error) {
+	var res string
+	var err error
+	done := make(chan struct{})
+	go func() {
+		res, err = makeRequest()
+		close(done)
+	}()
+
+	select {
+	case <-done:
+		return res, err
+	case <-time.After(time.Millisecond * time.Duration(timeToWaitInMs)):
+		return "", errors.New("Timed out")
+	}
+}
+
 func main() {
-	res, err := makeRequest()
+	res, err := makeCallOrTimeOutUsingTimePackage(1000)
 	if err != nil {
 		log.Fatal("Problem making request", err)
 	}
