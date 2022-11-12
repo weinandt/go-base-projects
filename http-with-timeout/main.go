@@ -54,7 +54,7 @@ func makeCallOrTimeoutManualContextCancellation(timeToWaitInMs uint) (string, er
 
 	// Becuase it is possible the request times out before the channel is written to,
 	// we need to make sure writing to the channel after the context is timedout does not block the go routine.
-	// Could also use a buffered channel of size 1 here.
+	// Could also use a buffered channel of size 1 here,
 	// as writing to a buffered channel will not block if the buffer is not full.
 	var res string
 	var err error
@@ -72,8 +72,37 @@ func makeCallOrTimeoutManualContextCancellation(timeToWaitInMs uint) (string, er
 	}
 }
 
+func httpRequestWithContextTimeout(timeToWaitInMs uint) (string, error) {
+	ctx, cancel := context.WithTimeout(context.Background(), time.Millisecond*time.Duration(timeToWaitInMs))
+	defer cancel()
+
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://jsonplaceholder.typicode.com/todos/1", nil)
+	if err != nil {
+		return "", err
+	}
+
+	client := &http.Client{}
+	res, err := client.Do(req)
+	if err != nil {
+		return "", err
+	}
+
+	if res.StatusCode != 200 {
+		return "", errors.New("Response was not 200")
+	}
+
+	defer res.Body.Close()
+	bodyBytes, err := io.ReadAll(res.Body)
+	if err != nil {
+		return "", err
+	}
+	bodyString := string(bodyBytes)
+
+	return bodyString, nil
+}
+
 func main() {
-	res, err := makeCallOrTimeoutManualContextCancellation(1000)
+	res, err := httpRequestWithContextTimeout(1000)
 	if err != nil {
 		log.Fatal("Problem making request", err)
 	}
