@@ -38,3 +38,12 @@ resource "aws_lambda_function" "http_lambda" {
   runtime          = "go1.x"
   source_code_hash = filebase64sha256("api.zip")
 }
+
+resource "aws_lambda_function_url" "function_url" {
+  function_name      = aws_lambda_function.http_lambda.function_name
+  authorization_type = "NONE"
+}
+
+output "function_url" {
+ value = aws_lambda_function_url.function_url.function_url
+}
