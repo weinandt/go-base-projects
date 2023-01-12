@@ -22,6 +22,12 @@ func init() {
 		})
 	})
 
+	r.POST("/echo", func(c *gin.Context) {
+		c.JSON(200, gin.H{
+			"message": "Response from the post",
+		})
+	})
+
 	ginLambda = ginadapter.NewV2(r)
 }
 
