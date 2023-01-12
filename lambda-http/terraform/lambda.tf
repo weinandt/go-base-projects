@@ -31,12 +31,12 @@ resource "aws_iam_role_policy_attachment" "lambda_policy" {
 }
 
 resource "aws_lambda_function" "http_lambda" {
-  filename         = "api.zip"
+  filename         = data.archive_file.lambda_zip.output_path
   function_name    = "http-lambda"
   handler          = "api" # For golang, the handler function must match the name of the binary present when the archive is unziped.
   role             = aws_iam_role.lambda_role.arn
   runtime          = "go1.x"
-  source_code_hash = filebase64sha256("api.zip")
+  source_code_hash = data.archive_file.lambda_zip.output_base64sha256
 }
 
 resource "aws_lambda_function_url" "function_url" {
